@@ -1,0 +1,9 @@
+apiVersion: oauth.emdinix.io/v1alpha1
+kind: OAuthProxy
+metadata:
+  name: my-protected-route
+spec:
+  namespace: "oauth-proxy"
+  resourcename: "oauth-protected"
+  resourcekind: "DeploymentConfig"
+  upstreamport: 8080

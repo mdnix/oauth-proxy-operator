@@ -1,0 +1,77 @@
+
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.3.0
+  creationTimestamp: null
+  name: oauthproxies.oauth.emdinix.io
+spec:
+  group: oauth.emdinix.io
+  names:
+    kind: OAuthProxy
+    listKind: OAuthProxyList
+    plural: oauthproxies
+    singular: oauthproxy
+  scope: Cluster
+  subresources:
+    status: {}
+  validation:
+    openAPIV3Schema:
+      description: OAuthProxy is the Schema for the oauthproxies API
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          description: OAuthProxySpec defines the desired state of OAuthProxy
+          properties:
+            namespace:
+              description: Namespace where Custom Resource should take actions
+              type: string
+            resourcekind:
+              description: Resource Kind can be Deployment, DeyplomentConfig, DaemonSet
+                or StatefulSet
+              type: string
+            resourcename:
+              description: Resource to protect by OAuthProxy
+              type: string
+            upstreamport:
+              description: Defines the upstream port which will be protected
+              type: integer
+          required:
+          - namespace
+          - resourcekind
+          - resourcename
+          - upstreamport
+          type: object
+        status:
+          description: OAuthProxyStatus defines the observed state of OAuthProxy
+          properties:
+            message:
+              type: string
+          required:
+          - message
+          type: object
+      type: object
+  version: v1alpha1
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []
